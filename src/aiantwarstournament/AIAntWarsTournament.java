@@ -23,12 +23,12 @@ public class AIAntWarsTournament
      */
     public static void main(String[] args)
     {
-        String path = "D:/AIAntWarsTournament";
+        String path = "D:/AIAntWarsTournament/final2";
         Loader loader = new Loader(path);
         
         Collection<PlayerFactory<IAntAI>> ais = loader.loadCategory("A", 10);
         
-        System.out.println("\n\n\nFinal tournament: Total war...");
+        System.out.println("\n\n\nFinal final tournament: Total war...");
         TextTournamentUI.turnOffIO();
         Tournament.run(new AIAntWarsGameFactory(), ais, false);
         TextTournamentUI.turnOnIO();

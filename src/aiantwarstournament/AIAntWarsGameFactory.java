@@ -25,7 +25,7 @@ public class AIAntWarsGameFactory implements GameFactory<IAntAI>
     @Override
     public GameInstance<IAntAI> getNewGameInstance()
     {
-        return new AIAntWarsGameInstance(32, 17, 16, 4, 0, 4, 5, 20);
+        return new AIAntWarsGameInstance(32, 17, 16, 4, 0, 4, 5, 100);
     }
     
 }

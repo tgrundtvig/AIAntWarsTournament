@@ -14,7 +14,10 @@ import tournament.ui.TournamentUI;
 public class Timer implements Runnable
 {
     private final TournamentUI ui;
-    private final long timeout = 5000;
+    private final long timeout = 1000;
+    private final long reportInterval = 60000;
+    private long totalTime = 0;
+    private long lastReport = 0;
     private final Thread thread;
     private final String ID;
     private String method;
@@ -67,12 +70,19 @@ public class Timer implements Runnable
     
     public synchronized void exit()
     {
+        long exitTime = (System.nanoTime() / 1000000);
+        totalTime += exitTime - entryTime;
         method = null;
         entryTime = 0;
     }
     
     public synchronized void check()
     {
+        if(totalTime >= lastReport + reportInterval)
+        {
+            lastReport += reportInterval;
+            ui.timeConsumedReport(ID, lastReport);
+        }
         if(entryTime != 0)
         {
             long elapsed = (System.nanoTime() / 1000000) - entryTime;
@@ -81,6 +91,7 @@ public class Timer implements Runnable
                 ui.timeoutOccurred(ID, method);
             }
         }
+        
     }
     
 }
